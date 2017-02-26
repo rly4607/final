@@ -58,9 +58,22 @@ var App = React.createClass({
     // sorted A-Z), or "map" (the data visualized)
     // We should probably do the sorting and setting of movies in state here.
     // You should really look at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
-    this.setState({
-      currentView: view
-    })
+    if(view === 'alpha') {
+      this.setState({
+        movies: movieData.sort(this.movieCompareByTitle),
+        currentView: "alpha"
+      })
+    } else if (view === 'latest') {
+      this.setState({
+        movies: movieData.sort(this.movieCompareByReleased),
+        currentView: "latest"
+      })
+    } else if (view === 'map') {
+      this.setState({
+        currentView: "map"
+      })
+    }
+
   },
   renderMovieDetails: function() {
     if (this.state.currentMovie == null) {
@@ -108,14 +121,11 @@ var App = React.createClass({
     return {
       movies: movieData.sort(this.movieCompareByReleased),
       currentMovie: null,
-      currentView: 'latest',
+      currentView: "latest",
       currentUser: null
     }
   },
   componentDidMount: function() {
-    // We'll need to enter our Firebase configuration at the top of this file and
-    // un-comment this to make the Firebase database work
-    // base.syncState('/movies', { context: this, state: 'movies', asArray: true })
     base.syncState('/movies', { context: this, state: 'movies', asArray: true })
     base.onAuth(this.authChanged)
   },
@@ -153,7 +163,7 @@ var App = React.createClass({
         <Header currentUser={this.state.currentUser}
           login={this.login}
           logout={this.logout}/>
-        <SortBar movieCount={this.state.movies.length} viewChanged={this.viewChanged} />
+        <SortBar movieCount={this.state.movies.length} viewChanged={this.viewChanged} currentView={this.state.currentView} />
         <div className="main row">
           {this.renderMainSection()}
         </div>
