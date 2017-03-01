@@ -60,12 +60,12 @@ var App = React.createClass({
     // You should really look at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
     if(view === 'alpha') {
       this.setState({
-        movies: movieData.sort(this.movieCompareByTitle),
+        movies: this.state.movies.sort(this.movieCompareByTitle),
         currentView: "alpha"
       })
     } else if (view === 'latest') {
       this.setState({
-        movies: movieData.sort(this.movieCompareByReleased),
+        movies: this.state.movies.sort(this.movieCompareByReleased),
         currentView: "latest"
       })
     } else if (view === 'map') {
