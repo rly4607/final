@@ -62,9 +62,9 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-image: -webkit-gradient(linear,  left top,  right top,
-                    color-stop(0.00, red),
+                    color-stop(0.00, #969292),
                     color-stop(12%, white),
-                    color-stop(17%, blue));
+                    color-stop(22%, blue));
 }
 .sort {
   background-color: #f4f4f4;
