@@ -16,6 +16,9 @@ var MovieDetails = require('./components/MovieDetails')
 var MovieList = require('./components/MovieList')
 var NoCurrentMovie = require('./components/NoCurrentMovie')
 var SortBar = require('./components/SortBar')
+var MovieMap = require('./components/MovieMap')
+
+var doOnceFlag = 10
 
 // There should really be some JSON-formatted data in movies.json, instead of an empty array.
 // I started writing this command to extract the data from the learn-sql workspace
@@ -33,6 +36,7 @@ var base = Rebase.createClass({
 })
 
 var App = React.createClass({
+
   movieClicked: function(movie) {
     this.setState({
       currentMovie: movie
@@ -54,10 +58,6 @@ var App = React.createClass({
     })
   },
   viewChanged: function(view) {
-    // View is either "latest" (movies sorted by release), "alpha" (movies
-    // sorted A-Z), or "map" (the data visualized)
-    // We should probably do the sorting and setting of movies in state here.
-    // You should really look at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
     if(view === 'alpha') {
       this.setState({
         movies: this.state.movies.sort(this.movieCompareByTitle),
@@ -84,11 +84,11 @@ var App = React.createClass({
     }
   },
   renderMainSection: function() {
+
+
     if (this.state.currentView === 'map') {
       return (
-        <div className="col-sm-12">
-          <h3>This would be an awfully good place to put a map.</h3>
-        </div>
+        <MovieMap lat={this.state.latitude} long={this.state.longitude}/>
       )
     } else {
       return (
@@ -118,11 +118,14 @@ var App = React.createClass({
     }
   },
   getInitialState: function() {
+
     return {
       movies: movieData.sort(this.movieCompareByReleased),
       currentMovie: null,
       currentView: "latest",
-      currentUser: null
+      currentUser: null,
+      latitude: '41.878114',
+      longitude: '-87.629798'
     }
   },
   componentDidMount: function() {
@@ -147,7 +150,6 @@ var App = React.createClass({
       console.log("Login failed")
     } else {
       console.log("Login succeeded")
-      console.log(this.props.currentUser)
     }
   },
   login: function() {

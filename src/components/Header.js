@@ -22,7 +22,7 @@ var Header = React.createClass({
     return (
       <div className="header row">
         <div className="col-sm-9">
-          <h1>Buyflix</h1>
+          <h1 className="rainbow">AmericaFlix</h1>
         </div>
         <div className="hello col-sm-3 text-center">
           <h2>{this.greeting()}</h2>
