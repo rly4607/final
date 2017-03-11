@@ -1,4 +1,4 @@
-# Buyflix Final Project for KIEI-924
+# Buyflix (Queriable) Final Project for KIEI-924
 
 ## Getting Started
 
