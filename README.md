@@ -1,4 +1,4 @@
-# Buyflix Starter Project for KIEI-924
+# Buyflix Final Project for KIEI-924
 
 ## Getting Started
 
@@ -15,3 +15,5 @@ npm start
 ```
 
 For educational purposes only.
+
+Includes database synced with Google Firebase
