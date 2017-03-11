@@ -18,7 +18,7 @@ var NoCurrentMovie = require('./components/NoCurrentMovie')
 var SortBar = require('./components/SortBar')
 var MovieMap = require('./components/MovieMap')
 
-var doOnceFlag = 10
+var doOnceFlag = 1
 
 // There should really be some JSON-formatted data in movies.json, instead of an empty array.
 // I started writing this command to extract the data from the learn-sql workspace
@@ -36,6 +36,20 @@ var base = Rebase.createClass({
 })
 
 var App = React.createClass({
+
+  getLocData: function() {
+      if(doOnceFlag) {
+      fetch("https://freegeoip.net/json/").then(function(response) {
+        return response.json()
+      }).then(function(json) {
+          this.setState({
+            latitude: json.latitude,
+            longitude: json.longitude
+          })
+      }.bind(this))
+      doOnceFlag = 0;
+    }
+  },
 
   movieClicked: function(movie) {
     this.setState({
@@ -138,7 +152,6 @@ var App = React.createClass({
       this.setState({
         currentUser: user
       })
-      console.log(user)
     } else {
       this.setState({
         currentUser: null
@@ -160,6 +173,7 @@ var App = React.createClass({
   },
 
   render: function() {
+    this.getLocData()
     return (
       <div>
         <Header currentUser={this.state.currentUser}
