@@ -13,7 +13,7 @@ var MovieMap = React.createClass({
                  height={'480px'}
                  lat={this.props.lat}
                  lng={this.props.long}
-                 zoom={12}
+                 zoom={13}
                  loadingMessage={'Loading Theatres Nearest You'}
                  params={{v: '3.exp', key: 'AIzaSyB3p_xQIXsFMDGLYNEiVkgW5fsVSUOd01c'}}>
 

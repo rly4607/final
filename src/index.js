@@ -39,12 +39,12 @@ var App = React.createClass({
 
   getLocData: function() {
       if(doOnceFlag) {
-      fetch("https://freegeoip.net/json/").then(function(response) {
+      fetch("http://ip-api.com/json").then(function(response) {
         return response.json()
       }).then(function(json) {
           this.setState({
-            latitude: json.latitude,
-            longitude: json.longitude
+            latitude: json.lat,
+            longitude: json.lon
           })
       }.bind(this))
       doOnceFlag = 0;
@@ -138,8 +138,8 @@ var App = React.createClass({
       currentMovie: null,
       currentView: "latest",
       currentUser: null,
-      latitude: '41.878114',
-      longitude: '-87.629798'
+      latitude: "41.956",
+      longitude: "-87.6607"
     }
   },
   componentDidMount: function() {
